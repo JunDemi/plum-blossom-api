@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IPlum } from './plum.interfaces';
-import { CreatePlumDto, UpdatePlumDto } from './plum.dto';
+import { IPlum } from '../plum.interfaces';
+import { CreatePlumDto, UpdatePlumDto } from '../plum.dto';
 
 @Injectable()
 export class PlumService {

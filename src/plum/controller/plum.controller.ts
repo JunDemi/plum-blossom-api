@@ -7,9 +7,9 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { PlumService } from 'src/plum/service/plum.service';
-import { CreatePlumDto, UpdatePlumDto } from 'src/plum/service/plum.dto';
-import { IPlum } from 'src/plum/service/plum.interfaces';
+import { CreatePlumDto, UpdatePlumDto } from '../plum.dto';
+import { IPlum } from '../plum.interfaces';
+import { PlumService } from '../service/plum.service';
 
 // Entry Point
 @Controller('/plum')
