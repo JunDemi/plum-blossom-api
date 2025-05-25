@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
+import { PlumModule } from './plum/plum.module';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 
 @Module({
-  imports: [],
+  imports: [PlumModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
