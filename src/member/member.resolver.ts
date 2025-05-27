@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { MemberEntity } from './member.entity';
-import { CreateMemberDTO, UpdateMemberDTO } from './member.dto';
+import { CreateMemberDTO, DeleteMemberDTO, UpdateMemberDTO } from './member.dto';
 import { MemberService } from './member.service';
 
 @Resolver((of) => MemberEntity)
@@ -9,7 +9,7 @@ export class MemberResolver {
 
   //멤버 조회
   @Query((returns) => [MemberEntity])
-  getMembers(): Promise<MemberEntity[]> {
+  async getMembers(): Promise<MemberEntity[]> {
     return this.memberService.getMembers();
   }
 
@@ -37,6 +37,19 @@ export class MemberResolver {
       return true;
     } catch (e) {
       return true;
+    }
+  }
+
+  //멤버 삭제
+  @Mutation((returns) => Boolean)
+  async deleteMember(
+    @Args('input') updateMemberDto: DeleteMemberDTO,
+  ): Promise<boolean> {
+    try {
+      await this.memberService.deleteMember(updateMemberDto);
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }

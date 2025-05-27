@@ -1,5 +1,6 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsBoolean, IsOptional, IsString, Length } from 'class-validator';
+import { CommonEntity } from 'src/common/common.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 /** 회원DB 모델 */

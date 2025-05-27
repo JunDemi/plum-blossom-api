@@ -6,6 +6,7 @@ import { MemberModule } from './member/member.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { MemberEntity } from './member/member.entity';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { MemberEntity } from './member/member.entity';
       autoSchemaFile: true,
     }),
     MemberModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [],
