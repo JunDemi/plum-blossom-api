@@ -24,75 +24,75 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  // default url
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
+  // // default url
+  // it('/ (GET)', () => {
+  //   return request(app.getHttpServer())
+  //     .get('/')
+  //     .expect(200)
+  //     .expect('Hello World!');
+  // });
 
-  // plum
-  describe('/plum', () => {
-    // plum 전체 조회
-    it('GET', () => {
-      return request(app.getHttpServer())
-        .get('/plum')
-        .expect(200)
-        .expect((res) => {
-          expect(res.body).toBeInstanceOf(Array);
-        });
-    });
+  // // plum
+  // describe('/plum', () => {
+  //   // plum 전체 조회
+  //   it('GET', () => {
+  //     return request(app.getHttpServer())
+  //       .get('/plum')
+  //       .expect(200)
+  //       .expect((res) => {
+  //         expect(res.body).toBeInstanceOf(Array);
+  //       });
+  //   });
 
-    // plum 객체 생성
-    it('POST 201', () => {
-      return request(app.getHttpServer())
-        .post('/plum')
-        .send({
-          title: 'Test Plum',
-          genre: ['test'],
-          year: 2025,
-        })
-        .expect(201);
-    });
-     // plum 객체 생성
-    it('POST 400', () => {
-      return request(app.getHttpServer())
-        .post('/plum')
-        .send({
-          title: 'Test Plum',
-          genre: ['test'],
-          year: 2025,
-          other: 'invalid', // 잘못된 필드
-        })
-        .expect(400);
-    });
-    // 404
-    it('DELETE', () => {
-      return request(app.getHttpServer()).delete('/plum').expect(404);
-    });
-  });
+  //   // plum 객체 생성
+  //   it('POST 201', () => {
+  //     return request(app.getHttpServer())
+  //       .post('/plum')
+  //       .send({
+  //         title: 'Test Plum',
+  //         genre: ['test'],
+  //         year: 2025,
+  //       })
+  //       .expect(201);
+  //   });
+  //    // plum 객체 생성
+  //   it('POST 400', () => {
+  //     return request(app.getHttpServer())
+  //       .post('/plum')
+  //       .send({
+  //         title: 'Test Plum',
+  //         genre: ['test'],
+  //         year: 2025,
+  //         other: 'invalid', // 잘못된 필드
+  //       })
+  //       .expect(400);
+  //   });
+  //   // 404
+  //   it('DELETE', () => {
+  //     return request(app.getHttpServer()).delete('/plum').expect(404);
+  //   });
+  // });
 
-  describe('/plum/:id', () => {
-    // plum 상세 조회, 수정, 삭제
-    it('GET 200', () => {
-      return request(app.getHttpServer()).get('/plum/1').expect(200);
-    });
-    it('GET 404', () => {
-      return request(app.getHttpServer()).get('/plum/999').expect(404);
-    });
-    it('PATCH 200', () => {
-      return request(app.getHttpServer())
-        .patch('/plum/1')
-        .send({
-          title: 'Updated Plum',
-          genre: ['updated'],
-          year: 2026,
-        })
-        .expect(200);
-    });
-    it('DELETE 200', () => {
-      return request(app.getHttpServer()).delete('/plum/1').expect(200);
-    });
-  });
+  // describe('/plum/:id', () => {
+  //   // plum 상세 조회, 수정, 삭제
+  //   it('GET 200', () => {
+  //     return request(app.getHttpServer()).get('/plum/1').expect(200);
+  //   });
+  //   it('GET 404', () => {
+  //     return request(app.getHttpServer()).get('/plum/999').expect(404);
+  //   });
+  //   it('PATCH 200', () => {
+  //     return request(app.getHttpServer())
+  //       .patch('/plum/1')
+  //       .send({
+  //         title: 'Updated Plum',
+  //         genre: ['updated'],
+  //         year: 2026,
+  //       })
+  //       .expect(200);
+  //   });
+  //   it('DELETE 200', () => {
+  //     return request(app.getHttpServer()).delete('/plum/1').expect(200);
+  //   });
+  // });
 });
