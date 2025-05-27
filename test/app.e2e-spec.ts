@@ -3,6 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
+import { MemberEntity } from 'src/member/member.entity';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
@@ -24,13 +25,61 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  // // default url
-  // it('/ (GET)', () => {
-  //   return request(app.getHttpServer())
-  //     .get('/')
-  //     .expect(200)
-  //     .expect('Hello World!');
-  // });
+  describe('/member', () => {
+    // member 전체 조회
+    it('GET', () => {
+      return request(app.getHttpServer())
+        .get('/member')
+        .expect(200)
+        .expect((res) => {
+          expect(res.body).toBeInstanceOf(Array<MemberEntity>);
+        });
+    });
+
+    // member 객체 생성
+    it('POST 201', () => {
+      return request(app.getHttpServer())
+        .post('/member')
+        .send({
+          name: 'Test Member',
+          job: 'Test',
+          password: 'test1234',
+        })
+        .expect(201);
+    });
+  });
+
+  describe('/member/:id', () => {
+    // member 상세 조회
+    it('GET 200', () => {
+      return request(app.getHttpServer())
+        .get('/member/1')
+        .expect(200)
+        .expect((res) => {
+          expect(res.body).toHaveProperty('id');
+          expect(res.body).toHaveProperty('name');
+          expect(res.body).toHaveProperty('job');
+          expect(res.body).toHaveProperty('password');
+          expect(res.body).toHaveProperty('isManager');
+        });
+    });
+
+    // member 수정
+    it('PATCH 200', () => {
+      return request(app.getHttpServer())
+        .patch('/member/1')
+        .send({
+          name: 'Updated Member',
+          job: 'Updated Job',
+        })
+        .expect(200);
+    });
+
+    // member 삭제
+    it('DELETE 200', () => {
+      return request(app.getHttpServer()).delete('/member/1').expect(200);
+    });
+  });
 
   // // plum
   // describe('/plum', () => {
