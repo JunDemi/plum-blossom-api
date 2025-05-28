@@ -35,6 +35,9 @@ const envRecord: Record<string, string> = {
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV !== 'prod',
       entities: [Member, Register],
+      ...(process.env.NODE_ENV === 'prod'
+        ? { ssl: { rejectUnauthorized: true } }
+        : {}),
     }),
     GraphQLModule.forRoot({
       driver: ApolloDriver,
