@@ -1,15 +1,15 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { MemberEntity } from './member.entity';
+import { Member } from './member.entity';
 import { CreateMemberDTO, DeleteMemberDTO, UpdateMemberDTO } from './member.dto';
 import { MemberService } from './member.service';
 
-@Resolver((of) => MemberEntity)
+@Resolver((of) => Member)
 export class MemberResolver {
   constructor(private readonly memberService: MemberService) {}
 
   //멤버 조회
-  @Query((returns) => [MemberEntity])
-  async getMembers(): Promise<MemberEntity[]> {
+  @Query((returns) => [Member])
+  async getMembers(): Promise<Member[]> {
     return this.memberService.getMembers();
   }
 

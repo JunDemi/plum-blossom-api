@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MemberEntity } from './member.entity';
+import { Member } from './member.entity';
 import { Repository } from 'typeorm';
 import {
   CreateMemberDTO,
@@ -11,18 +11,18 @@ import {
 @Injectable()
 export class MemberService {
   constructor(
-    @InjectRepository(MemberEntity)
-    private readonly memberRepo: Repository<MemberEntity>,
+    @InjectRepository(Member)
+    private readonly memberRepo: Repository<Member>,
   ) {}
 
   //멤버 조회
-  getMembers(): Promise<MemberEntity[]> {
+  getMembers(): Promise<Member[]> {
     return this.memberRepo.find({
       order: {
-        id: 'ASC',
+        no: 'ASC',
       },
       select: {
-        id: true,
+        no: true,
         name: true,
         job: true,
         isManager: true,
@@ -31,10 +31,10 @@ export class MemberService {
   }
 
   //단일 멤버 조회
-  getOneMember(id: number): Promise<MemberEntity | null> {
-    const member = this.memberRepo.findOneBy({ id });
+  getOneMember(no: number): Promise<Member | null> {
+    const member = this.memberRepo.findOneBy({ no });
     if (!member) {
-      throw new NotFoundException(`Member with id ${id} not found`);
+      throw new NotFoundException(`Member with no ${no} not found`);
     }
     return member;
   }
@@ -46,12 +46,12 @@ export class MemberService {
   }
 
   //멤버 수정
-  updateMember({ id, data }: UpdateMemberDTO) {
-    return this.memberRepo.update(id, { ...data });
+  updateMember({ no, data }: UpdateMemberDTO) {
+    return this.memberRepo.update(no, { ...data });
   }
 
   //멤버 삭제
-  deleteMember({ id }: DeleteMemberDTO) {
-    return this.memberRepo.delete(id);
+  deleteMember({ no }: DeleteMemberDTO) {
+    return this.memberRepo.delete(no);
   }
 }

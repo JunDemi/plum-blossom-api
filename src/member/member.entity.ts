@@ -1,17 +1,16 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsBoolean, IsOptional, IsString, Length } from 'class-validator';
-import { CommonEntity } from 'src/common/common.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 /** 회원DB 모델 */
 @InputType({ isAbstract: true })
 @ObjectType()
 @Entity()
-export class MemberEntity {
+export class Member {
   /** PK */
   @PrimaryGeneratedColumn()
   @Field((type) => Number)
-  id: number;
+  no: number;
 
   /** 이름 */
   @Field((is) => String)

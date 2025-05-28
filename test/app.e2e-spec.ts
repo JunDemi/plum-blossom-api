@@ -3,7 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
-import { MemberEntity } from 'src/member/member.entity';
+import { Member } from 'src/member/member.entity';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
@@ -32,7 +32,7 @@ describe('AppController (e2e)', () => {
         .get('/member')
         .expect(200)
         .expect((res) => {
-          expect(res.body).toBeInstanceOf(Array<MemberEntity>);
+          expect(res.body).toBeInstanceOf(Array<Member>);
         });
     });
 

@@ -8,10 +8,9 @@ import {
   Post,
 } from '@nestjs/common';
 import { MemberService } from './member.service';
-import { MemberEntity } from './member.entity';
+import { Member } from './member.entity';
 import {
   CreateMemberDTO,
-  DeleteMemberDTO,
   UpdateMemberInputType,
 } from './member.dto';
 
@@ -22,14 +21,14 @@ export class MemberController {
 
   //멤버 조회
   @Get()
-  getMembers(): Promise<MemberEntity[]> {
+  getMembers(): Promise<Member[]> {
     return this.memberService.getMembers();
   }
 
   //단일 멤버 조회
   @Get('/:id')
-  getOneMember(@Param('id') id: number): Promise<MemberEntity | null> {
-    return this.memberService.getOneMember(id);
+  getOneMember(@Param('no') no: number): Promise<Member | null> {
+    return this.memberService.getOneMember(no);
   }
 
   //맴버 생성
@@ -41,20 +40,20 @@ export class MemberController {
   //멤버 수정
   @Patch('/:id')
   updateMember(
-    @Param('id') id: number,
+    @Param('no') no: number,
     @Body() pathData: UpdateMemberInputType,
   ) {
     return this.memberService.updateMember({
-      id,
+      no,
       data: pathData,
     });
   }
 
   //멤버 삭제
   @Delete('/:id')
-  deleteMember(@Param('id') id: number) {
+  deleteMember(@Param('no') no: number) {
     return this.memberService.deleteMember({
-      id,
+      no,
     });
   }
 }
