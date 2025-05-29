@@ -25,6 +25,8 @@ async function bootstrap() {
       transform: true, // 요청 객체를 DTO로 변환 (id:string -> id:number 등)
     }),
   );
+
+  app.enableCors();
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
